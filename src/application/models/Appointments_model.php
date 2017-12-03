@@ -34,8 +34,18 @@ class Appointments_Model extends CI_Model {
 
         // Perform insert() or update() operation.
         if (!isset($appointment['id'])) {
+
+            //before insert, invoke EMR method to update EMR appointment
+            $emr_apptID = '';
+
+            //insert to easy appointment db
             $appointment['id'] = $this->_insert($appointment);
+
+            //if it's successful, generate the reference record between easy appointment and integration database
+
+
         } else {
+
             $this->_update($appointment);
         }
 
@@ -225,6 +235,9 @@ class Appointments_Model extends CI_Model {
             throw new Exception('Invalid argument type $appointment_id (value:"' . $appointment_id . '")');
         }
 
+        //invoke EMR appointment delete
+
+        //check if appointment is still in EMR, if it is, do NOT delete
         $num_rows = $this->db->get_where('ea_appointments', array('id' => $appointment_id))->num_rows();
 
         if ($num_rows == 0) {
