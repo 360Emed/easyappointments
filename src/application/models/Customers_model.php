@@ -60,6 +60,9 @@ class Customers_Model extends CI_Model {
      * @return bool Returns whether the record exists or not.
      */
     public function exists($customer) {
+
+        //before anything, check if customer exists in EMR
+
         if (!isset($customer['email'])) {
             throw new Exception('Customer\'s email is not provided.');
         }
@@ -313,6 +316,17 @@ class Customers_Model extends CI_Model {
      */
     public function get_customers_role_id() {
         return $this->db->get_where('ea_roles', array('slug' => DB_SLUG_CUSTOMER))->row()->id;
+    }
+
+    public function existsEMRCustomer($customer)
+    {
+        $firstname = $customer['first_name'];
+        $lastname = $customer['last_name'];
+        $dob = $customer['dob'];
+        $email = $customer['email'];
+        $cutil = new CurlUtil();
+        $searchFilter =  '?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
+        return $cutil->getData($searchFilter);
     }
 }
 

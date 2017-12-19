@@ -102,6 +102,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="dob"><?php echo $this->lang->line('Date of Birth'); ?> *</label>
+                        <input type="date" id="dob" class="form-control required" />
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="email"><?php echo $this->lang->line('email'); ?> *</label>
                         <input type="text" id="email" class="form-control required" />
                     </div>

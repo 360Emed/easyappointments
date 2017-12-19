@@ -372,11 +372,18 @@ class Appointments extends CI_Controller {
             $appointment = $_POST['post_data']['appointment'];
             $customer = $_POST['post_data']['customer'];
 
-            if ($this->customers_model->exists($customer)) {
-                $customer['id'] = $this->customers_model->find_record_id($customer);
-			}
+            if ($this->customers_model->existsEMRCustomer($customer))
+            {
+                if ($this->customers_model->exists($customer)) {
+                    $customer['id'] = $this->customers_model->find_record_id($customer);
+                }
 
-            $customer_id = $this->customers_model->add($customer);
+                $customer_id = $this->customers_model->add($customer);
+            }
+            else{
+                print_r("Custmoer DOES NOT EXISTS IN EMR");die;
+            }
+
             $appointment['id_users_customer'] = $customer_id;
 			$appointment['is_unavailable'] = (int)$appointment['is_unavailable']; // needs to be type casted
             $appointment['id'] = $this->appointments_model->add($appointment);
