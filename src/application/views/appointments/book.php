@@ -264,7 +264,7 @@
                                     <input type="text" id="last-name" class="required form-control" maxlength="250" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="dob" class="control-label"><?php echo $this->lang->line('Date of Birth'); ?> *</label>
+                                    <label for="dob" class="control-label">Date of Birth *</label>
                                     <input type="date" id="dob" class="required form-control" maxlength="250" />
                                 </div>
                                 <div class="form-group">

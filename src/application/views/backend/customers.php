@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="dob"><?php echo $this->lang->line('Date of Birth'); ?> *</label>
+                        <label for="dob">Date of Birth *</label>
                         <input type="date" id="dob" class="form-control required" />
                     </div>
                     
