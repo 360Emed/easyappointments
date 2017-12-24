@@ -634,7 +634,12 @@ class Appointments extends CI_Controller {
 	 * @return array Returns an array with the available time periods of the provider.
 	 */
 	protected function _get_provider_available_time_periods($provider_id, $selected_date,
-			$exclude_appointments = array()) {
+			$exclude_appointments = array())
+    {
+
+        //this is the tricky function that load the availability of the provider.
+
+
 		$this->load->model('appointments_model');
 	    $this->load->model('providers_model');
 
