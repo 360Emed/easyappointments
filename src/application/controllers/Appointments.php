@@ -291,6 +291,11 @@ class Appointments extends CI_Controller {
         $this->load->model('settings_model');
         $this->load->model('services_model');
 
+        $scheduleService = new SchedulingService();
+        $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] , $_POST['selected_date']);
+
+
+
         try {
 			// Do not continue if there was no provider selected (more likely there is no provider in the system).
 			if (empty($_POST['provider_id'])) {
@@ -636,6 +641,7 @@ class Appointments extends CI_Controller {
 	protected function _get_provider_available_time_periods($provider_id, $selected_date,
 			$exclude_appointments = array())
     {
+
 
         //this is the tricky function that load the availability of the provider.
 

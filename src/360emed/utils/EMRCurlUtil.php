@@ -5,10 +5,16 @@
  * Date: 12/18/17
  * Time: 11:31 PM
  */
-class CurlUtil
+class EMRCurlUtil
 {
-    var $auth_key = "112112-1221-221212";
-    var $server = "https://360emed.api.hmtrevolution.com/";
+    var $auth_key = "";
+    var $server = "https://portal.unionhealthcenter.org:3000/";
+
+
+    function __construct() {
+        //load key from file
+        $this->auth_key = file_get_contents("/var/www/keys/emedapi-key.txt");
+    }
 
     public function getData($apipath)
     {
@@ -17,7 +23,8 @@ class CurlUtil
        $ch = curl_init();
 
        // set URL and other appropriate options
-       curl_setopt($ch, CURLOPT_URL, $this->server . $apipath . '?validationToken=' . $this->auth_key);
+       curl_setopt($ch, CURLOPT_URL, $this->server . $apipath);
+       curl_setopt($ch, CURLOPT_HEADER, array($this->auth_key));
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
