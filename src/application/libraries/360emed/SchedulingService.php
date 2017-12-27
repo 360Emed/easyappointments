@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+require_once 'CurlUtil.php';
+require_once 'EMRCurlUtil.php';
 /**
  * Created by PhpStorm.
  * User: humingtang
