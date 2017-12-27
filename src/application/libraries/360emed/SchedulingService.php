@@ -18,7 +18,7 @@ class SchedulingService
     {
         //convert date string
         $dateObj = new DateTime($date);
-        $dateStr = $dateObj->format('mm-ddd-yyyy');
+        $dateStr = $dateObj->format('m-d-Y');
 
 
         //returns the schedule

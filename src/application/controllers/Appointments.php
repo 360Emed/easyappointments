@@ -291,10 +291,6 @@ class Appointments extends CI_Controller {
         $this->load->model('settings_model');
         $this->load->model('services_model');
 
-        $scheduleService = new SchedulingService();
-        $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] , $_POST['selected_date']);
-
-
 
         try {
 			// Do not continue if there was no provider selected (more likely there is no provider in the system).
@@ -309,7 +305,10 @@ class Appointments extends CI_Controller {
                     ? array($_POST['appointment_id'])
                     : array();
 
-			// If the user has selected the "any-provider" option then we will need to search
+            $scheduleService = new SchedulingService();
+            $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] , $_POST['selected_date']);
+
+            // If the user has selected the "any-provider" option then we will need to search
 			// for an available provider that will provide the requested service.
 			if ($_POST['provider_id'] === ANY_PROVIDER) {
 				$_POST['provider_id'] = $this->_search_any_provider($_POST['service_id'], $_POST['selected_date']);
