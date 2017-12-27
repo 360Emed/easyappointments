@@ -6,7 +6,7 @@
  * Date: 12/22/17
  * Time: 3:16 PM
  */
-class SchedulingService extends CI_Model
+class SchedulingService
 {
     /**
      * Get the provider schedule from the 360 emed service
