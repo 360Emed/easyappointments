@@ -37,8 +37,7 @@
 |
 */
 
-$autoload['packages'] = array(APPPATH.'360emed');
-print_r(APPPATH.'360emed');die;
+$autoload['packages'] = array();
 
 /*
 | -------------------------------------------------------------------
