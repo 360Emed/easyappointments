@@ -23,7 +23,7 @@ class SchedulingService
 
         //returns the schedule
         $httputil = new CurlUtil();
-        $apipath = $serviceID . '/' . $providerID . '/' . $dateStr . '/' . $dateStr;
+        $apipath = 'getdoctorschedule/' . $serviceID . '/' . $providerID . '/' . $dateStr . '/' . $dateStr;
         $results = $httputil->getData($apipath);
         print_r($results);
     }
