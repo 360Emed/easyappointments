@@ -44,7 +44,7 @@ class SchedulingService
     {
         print_r($date);
         //convert date string
-        $dateObj = DateTime::createFromFormat('Y-m-d',$date);
+        $dateObj = DateTime::createFromFormat($this->datetimeformat,$date);
 
         $firstDay = $dateObj->format('m-01-Y');
         $lastDay = $dateObj->format('m-t-Y');
