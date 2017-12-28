@@ -29,7 +29,6 @@ class SchedulingService
         $httputil = new CurlUtil();
         $apipath = 'getdoctorschedule/' . $serviceID . '/' . $providerID . '/' . $startdateStr . '/' . $enddateStr;
         $results = $httputil->getData($apipath);
-        print_r($results);
         //results is in json format
         return $results;
     }
