@@ -305,8 +305,9 @@ class Appointments extends CI_Controller {
                     ? array($_POST['appointment_id'])
                     : array();
 
+            $dateChecked = Datetime::createFromFormat('Y-m-d',$_POST['selected_date'] )->format('m-d-Y');
             $scheduleService = new SchedulingService();
-            $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] , $_POST['selected_date']);
+            $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
 
             // If the user has selected the "any-provider" option then we will need to search
 			// for an available provider that will provide the requested service.
@@ -508,7 +509,7 @@ class Appointments extends CI_Controller {
 
             //this returns the json array for the days NOT available for scheduling
             $schedule_service = new SchedulingService();
-            
+
             $unavailable_dates = $schedule_service->getUnavailableDaysForMonth($provider_id, $service_id, $selected_date->format('m-d-Y'));
 
             /*
