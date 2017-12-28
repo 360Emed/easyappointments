@@ -9,6 +9,7 @@ require_once 'EMRCurlUtil.php';
  */
 class SchedulingService
 {
+    var $datetimeformat = 'm-d-Y';
     /**
      * Get the provider schedule from the 360 emed service
      * @param $providerID
@@ -17,11 +18,11 @@ class SchedulingService
     function getSchedules($providerID, $serviceID, $startdate, $enddate)
     {
         //convert date string
-        $startdateObj = new DateTime($startdate);
-        $startdateStr = $startdateObj->format('m-d-Y');
+        $startdateObj = DateTime::createFromFormat($this->datetimeformat,$startdate);
+        $startdateStr = $startdateObj->format($this->datetimeformat);
 
         $enddateObj = new DateTime($enddate);
-        $enddateStr = $enddateObj->format('m-d-Y');
+        $enddateStr = $enddateObj->format($this->datetimeformat);
 
         //returns the schedule
         $httputil = new CurlUtil();
@@ -41,7 +42,7 @@ class SchedulingService
     function getUnavailableDaysForMonth($providerID, $serviceID, $date)
     {
         //convert date string
-        $dateObj = new DateTime($date);
+        $dateObj = DateTime::createFromFormat($this->datetimeformat,$date);
         $firstDay = date('m-01-Y', $dateObj);
         $lastDay = date('m-t-Y', $dateObj);
 
