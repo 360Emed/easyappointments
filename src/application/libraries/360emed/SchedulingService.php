@@ -43,7 +43,7 @@ class SchedulingService
     function getUnavailableDaysForMonth($providerID, $serviceID, $date)
     {
         //convert date string
-        $dateObj = DateTime::createFromFormat($this->datetimeformat,$date);
+        $dateObj = DateTime::createFromFormat('Y-m-d',$date);
         $firstDay = date('m-01-Y', $dateObj);
         $lastDay = date('m-t-Y', $dateObj);
 
