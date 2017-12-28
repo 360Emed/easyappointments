@@ -508,6 +508,7 @@ class Appointments extends CI_Controller {
 
             //this returns the json array for the days NOT available for scheduling
             $schedule_service = new SchedulingService();
+            print_r($selected_date->format('m-d-Y'));
             $unavailable_dates = $schedule_service->getUnavailableDaysForMonth($provider_id, $service_id, $selected_date->format('m-d-Y'));
 
             /*

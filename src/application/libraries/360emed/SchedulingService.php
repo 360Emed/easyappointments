@@ -10,6 +10,7 @@ require_once 'EMRCurlUtil.php';
 class SchedulingService
 {
     var $datetimeformat = 'm-d-Y';
+
     /**
      * Get the provider schedule from the 360 emed service
      * @param $providerID
