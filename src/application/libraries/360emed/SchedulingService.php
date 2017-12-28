@@ -67,8 +67,8 @@ class SchedulingService
         $unavailableslots = array();
 
         //loop through all days in a month
-        $start = new DateTime($firstDay);
-        $end = new DateTime($lastDay);
+        $start = DateTime::createFromFormat($this->datetimeformat,$firstDay);
+        $end = DateTime::createFromFormat($this->datetimeformat,$lastDay);
         $interval = DateInterval::createFromDateString('1 day');
 
         $period = new DatePeriod($start, $interval, $end);
