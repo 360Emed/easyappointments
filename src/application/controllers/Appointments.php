@@ -504,7 +504,14 @@ class Appointments extends CI_Controller {
 			$provider_id = $this->input->get('provider_id');
 			$service_id = $this->input->get('service_id');
 			$selected_date = new DateTime($this->input->get('selected_date'));
-			$number_of_days = (int)$selected_date->format('t');
+
+
+            //this returns the json array for the days NOT available for scheduling
+            $schedule_service = new SchedulingService();
+            $unavailable_dates = $schedule_service->getUnavailableDaysForMonth($provider_id, $service_id, $selected_date->format('m-d-Y'));
+
+            /*
+            $number_of_days = (int)$selected_date->format('t');
 			$unavailable_dates = array();
 
 			// Handle the "Any Provider" case.
@@ -543,7 +550,7 @@ class Appointments extends CI_Controller {
 					$unavailable_dates[] = $current_date->format('Y-m-d');
 				}
 			}
-
+            */
 			echo json_encode($unavailable_dates);
 		} catch(Exception $exc) {
             echo json_encode(array(
