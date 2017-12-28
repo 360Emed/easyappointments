@@ -58,7 +58,6 @@ class SchedulingService
         foreach ($openslots as $openslot)
         {
             $startTime = $openslot->start;
-            print_r($startTime);
             $startTimeObj = new DateTime($startTime);
             $formattedDate = $startTimeObj->format('Y-m-d');
             $openslotsDates[$formattedDate] = 1;
