@@ -44,11 +44,11 @@ class SchedulingService
     {
         //convert date string
         $dateObj = DateTime::createFromFormat('Y-m-d',$date);
+        print_r($dateObj);
         $firstDay = date('m-01-Y', $dateObj);
         $lastDay = date('m-t-Y', $dateObj);
 
-        print_r($firstDay);
-        print_r($lastDay);
+       
         //get all available timeslots for this month
         $results = $this->getSchedules($providerID, $serviceID, $firstDay, $lastDay);
 
@@ -58,7 +58,7 @@ class SchedulingService
         foreach ($openslots as $openslot)
         {
             $startTime = $openslot->start;
-            $startTimeObj = new DateTime($startTime);
+            $startTimeObj = DateTime::createFromFormat($this->datetimeformat,$startTime);
             $formattedDate = date('Y-m-d',$startTimeObj);
             $openslotsDates[$formattedDate] = 1;
         }
