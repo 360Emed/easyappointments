@@ -42,7 +42,7 @@ class SchedulingService
      */
     function getUnavailableDaysForMonth($providerID, $serviceID, $date)
     {
-        
+
         //convert date string
         $dateObj = DateTime::createFromFormat($this->datetimeformat,$date);
 
@@ -70,7 +70,7 @@ class SchedulingService
         $start = DateTime::createFromFormat($this->datetimeformat,$firstDay);
         $end = DateTime::createFromFormat($this->datetimeformat,$lastDay);
         $interval = DateInterval::createFromDateString('1 day');
-
+        print_r($openslotsDates);
         $period = new DatePeriod($start, $interval, $end);
 
         foreach ( $period as $dt )
