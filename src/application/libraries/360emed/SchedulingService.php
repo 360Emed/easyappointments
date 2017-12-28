@@ -29,7 +29,7 @@ class SchedulingService
         $httputil = new CurlUtil();
         $apipath = 'getdoctorschedule/' . $serviceID . '/' . $providerID . '/' . $startdateStr . '/' . $enddateStr;
         $results = $httputil->getData($apipath);
-
+        print_r($results);
         //results is in json format
         return $results;
     }
@@ -52,7 +52,7 @@ class SchedulingService
 
         //get all available timeslots for this month
         $results = $this->getSchedules($providerID, $serviceID, $firstDay, $lastDay);
-        print_r($results);
+
         //decode the schedule
         $openslots = json_decode($results);
         $openslotsDates = array();
