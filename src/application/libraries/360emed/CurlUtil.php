@@ -15,7 +15,7 @@ class CurlUtil
 
        //URL of targeted site
        $ch = curl_init();
-        print_r($this->server . $apipath . '?validationToken=' . $this->auth_key);
+
        // set URL and other appropriate options
        curl_setopt($ch, CURLOPT_URL, $this->server . $apipath . '?validationToken=' . $this->auth_key);
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
