@@ -52,7 +52,7 @@ class SchedulingService
 
         //get all available timeslots for this month
         $results = $this->getSchedules($providerID, $serviceID, $firstDay, $lastDay);
-
+        print_r($results);
         //decode the schedule
         $openslots = json_decode($results);
         $openslotsDates = array();
@@ -70,7 +70,7 @@ class SchedulingService
         $start = DateTime::createFromFormat($this->datetimeformat,$firstDay);
         $end = DateTime::createFromFormat($this->datetimeformat,$lastDay);
         $interval = DateInterval::createFromDateString('1 day');
-        print_r($openslotsDates);
+
         $period = new DatePeriod($start, $interval, $end);
 
         foreach ( $period as $dt )
