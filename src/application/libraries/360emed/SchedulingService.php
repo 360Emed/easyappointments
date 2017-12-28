@@ -59,7 +59,7 @@ class SchedulingService
         {
             $startTime = $openslot->start;
             print_r($startTime);
-            $startTimeObj = DateTime::createFromFormat('m/d/Y',$startTime);
+            $startTimeObj = new DateTime($startTime);
             $formattedDate = $startTimeObj->format('Y-m-d');
             $openslotsDates[$formattedDate] = 1;
         }
