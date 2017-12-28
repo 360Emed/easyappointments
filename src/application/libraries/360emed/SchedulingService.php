@@ -47,6 +47,8 @@ class SchedulingService
         $firstDay = date('m-01-Y', $dateObj);
         $lastDay = date('m-t-Y', $dateObj);
 
+        print_r($firstDay);
+        print_r($lastDay);
         //get all available timeslots for this month
         $results = $this->getSchedules($providerID, $serviceID, $firstDay, $lastDay);
 
