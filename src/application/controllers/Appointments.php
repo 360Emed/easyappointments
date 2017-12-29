@@ -308,8 +308,20 @@ class Appointments extends CI_Controller {
             $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
             $dateChecked = $dateChecked->format('m-d-Y');
             $scheduleService = new SchedulingService();
-            $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
+            $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
+            $schedules = json_decode($schedules);
+            foreach ($schedules as $schedule)
+            {
+                //get start datetime
+                $starttime = $schedule->start;
+                $starttime = new DateTime($starttime);
+                $starttime = $starttime->format('H:i');
+                $available_hours[] = $starttime;
+            }
 
+            //get the hours
+            $available_hours = array();
+            /*
             // If the user has selected the "any-provider" option then we will need to search
 			// for an available provider that will provide the requested service.
 			if ($_POST['provider_id'] === ANY_PROVIDER) {
@@ -334,7 +346,7 @@ class Appointments extends CI_Controller {
                 $this->_get_multiple_attendants_hours($available_hours, $attendants_number, $_POST['service_id'],
                     $_POST['selected_date']);
             }
-
+            */
             echo json_encode($available_hours);
 
         } catch(Exception $exc) {
