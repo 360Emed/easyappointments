@@ -43,11 +43,13 @@ class EMRCurlUtil
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
         file_put_contents($this->keyfilePath,$authKey);
+        $this->auth_key = file_get_contents($this->keyfilePath);
         
     }
 
     public function getData($apipath, $retry=0)
     {
+        print_r($this->server . $apipath);
        if ($retry==2)
        {
            throw new \Exception("Unable to authenticate to EMR server.");
