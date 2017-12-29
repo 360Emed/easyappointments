@@ -309,7 +309,7 @@ class Appointments extends CI_Controller {
             //return nothing if date is earlier than today
             if ($dateChecked<new DateTime())
             {
-                return json_encode(array());
+                return '[]';
             }
 
             $dateChecked = $dateChecked->format('m-d-Y');
