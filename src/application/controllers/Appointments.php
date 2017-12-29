@@ -291,7 +291,6 @@ class Appointments extends CI_Controller {
         $this->load->model('settings_model');
         $this->load->model('services_model');
 
-
         try {
 			// Do not continue if there was no provider selected (more likely there is no provider in the system).
 			if (empty($_POST['provider_id'])) {
@@ -306,6 +305,13 @@ class Appointments extends CI_Controller {
                     : array();
 
             $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
+
+            //return nothing if date is earlier than today
+            if ($dateChecked<new DateTime())
+            {
+                return array();
+            }
+
             $dateChecked = $dateChecked->format('m-d-Y');
             $scheduleService = new SchedulingService();
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
