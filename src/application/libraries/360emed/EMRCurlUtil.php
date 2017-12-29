@@ -70,7 +70,7 @@ class EMRCurlUtil
 
        if ($status = 401)
        {
-           refreshToken();
+           $this->refreshToken();
            $this->getData($apipath, $retry++);
 
        }
