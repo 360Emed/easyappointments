@@ -75,7 +75,7 @@ class SchedulingService
         foreach ( $period as $dt )
         {
             $dateStr = $dt->format('Y-m-d');
-            if (!array_key_exists($dateStr,$openslotsDates ))
+            if (!array_key_exists($dateStr,$openslotsDates ) && $dt->getTimestamp() >= time())
             {
                 $unavailableslots[]=$dateStr;
             }

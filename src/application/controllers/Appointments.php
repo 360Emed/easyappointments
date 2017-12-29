@@ -306,12 +306,6 @@ class Appointments extends CI_Controller {
 
             $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
 
-            //return nothing if date is earlier than today
-            if ($dateChecked<new DateTime())
-            {
-                return '[]';
-            }
-
             $dateChecked = $dateChecked->format('m-d-Y');
             $scheduleService = new SchedulingService();
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
