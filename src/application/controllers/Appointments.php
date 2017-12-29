@@ -309,11 +309,10 @@ class Appointments extends CI_Controller {
             $dateChecked = $dateChecked->format('m-d-Y');
             $scheduleService = new SchedulingService();
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
-
-            print_r($schedules);
-
             $schedules = json_decode($schedules);
 
+            //get the hours
+            $available_hours = array();
             foreach ($schedules as $schedule)
             {
                 //get start datetime
@@ -323,8 +322,6 @@ class Appointments extends CI_Controller {
                 $available_hours[] = $starttime;
             }
 
-            //get the hours
-            $available_hours = array();
             /*
             // If the user has selected the "any-provider" option then we will need to search
 			// for an available provider that will provide the requested service.
