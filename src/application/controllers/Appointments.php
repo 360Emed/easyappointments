@@ -305,7 +305,8 @@ class Appointments extends CI_Controller {
                     ? array($_POST['appointment_id'])
                     : array();
 
-            $dateChecked = Datetime::createFromFormat('d-m-Y',$_POST['selected_date'] )->format('m-d-Y');
+            $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
+            $dateChecked = $dateChecked->->format('m-d-Y');
             $scheduleService = new SchedulingService();
             $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
 
