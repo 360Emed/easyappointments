@@ -311,6 +311,9 @@ class Appointments extends CI_Controller {
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
             $schedules = json_decode($schedules);
 
+            //get current time
+            $currentTime = new DateTime();
+            $nextAvailableTime = $currentTime->modify('+ 1 hour');
             //get the hours
             $available_hours = array();
             foreach ($schedules as $schedule)
@@ -318,6 +321,11 @@ class Appointments extends CI_Controller {
                 //get start datetime
                 $starttime = $schedule->start;
                 $starttime = new DateTime($starttime);
+
+                //make sure you can't book an appointment 1 hour from current time.
+                if ($starttime < $nextAvailableTime)
+                    continue;
+
                 $starttime = $starttime->format('H:i');
                 $available_hours[] = $starttime;
             }
