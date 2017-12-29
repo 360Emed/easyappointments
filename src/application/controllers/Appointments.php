@@ -399,6 +399,7 @@ class Appointments extends CI_Controller {
             $appointment = $_POST['post_data']['appointment'];
             $customer = $_POST['post_data']['customer'];
 
+            //First Thing First, to validate if the customer is an EMR customer
             if ($this->customers_model->existsEMRCustomer($customer))
             {
                 if ($this->customers_model->exists($customer)) {

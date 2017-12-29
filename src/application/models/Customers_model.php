@@ -324,9 +324,10 @@ class Customers_Model extends CI_Model {
         $lastname = $customer['last_name'];
         $dob = $customer['dob'];
         $email = $customer['email'];
-        $cutil = new CurlUtil();
-        $searchFilter =  '?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
-        return $cutil->getData($searchFilter);
+
+        $emrSvc = new EMRService();
+        $results = $emrSvc->searchPatient($firstname, $lastname, $email, $dob);
+        return $results;
     }
 }
 

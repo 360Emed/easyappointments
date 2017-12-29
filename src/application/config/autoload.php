@@ -51,7 +51,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','360emed/SchedulingService');
+$autoload['libraries'] = array('database','360emed/SchedulingService', '360emed/EMRService');
 
 
 /*
