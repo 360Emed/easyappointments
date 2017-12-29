@@ -306,11 +306,14 @@ class Appointments extends CI_Controller {
                     : array();
 
             $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
-            print_r($dateChecked);
             $dateChecked = $dateChecked->format('m-d-Y');
             $scheduleService = new SchedulingService();
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
+
+            print_r($schedules);
+
             $schedules = json_decode($schedules);
+
             foreach ($schedules as $schedule)
             {
                 //get start datetime
