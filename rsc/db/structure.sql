@@ -79,6 +79,7 @@ CREATE TABLE `ea_users` (
   `city` varchar(256) DEFAULT NULL,
   `state` varchar(128) DEFAULT NULL,
   `zip_code` varchar(64) DEFAULT NULL,
+  `dob` datetime DEFAULT NULL,
   `notes` text,
   `id_roles` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
