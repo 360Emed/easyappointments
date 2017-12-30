@@ -73,7 +73,7 @@ class EMRCurlUtil
 
        // set URL and other appropriate options
        curl_setopt($ch, CURLOPT_URL, $this->server . $apipath);
-       curl_setopt($ch, CURLOPT_HEADER, array($this->auth_key));
+       curl_setopt($ch, CURLOPT_HTTPHEADER, array($this->auth_key));
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
