@@ -327,7 +327,7 @@ class Customers_Model extends CI_Model {
 
         $emrSvc = new EMRService();
         $results = $emrSvc->searchPatient($firstname, $lastname, $email, $dob);
-        print_r($results);die;
+        print_r($results);print_r('stop the processing!');
         return $results;
     }
 }
