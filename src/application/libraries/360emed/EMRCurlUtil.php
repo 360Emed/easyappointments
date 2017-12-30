@@ -12,7 +12,7 @@ class EMRCurlUtil
     var $server = "https://portal.unionhealthcenter.org:3000/";
     var $authRefreshURL = 'https://emed360.auth0.com/oauth/token';
     var $keyfilePath = '/cube/apps/360emed/auth_token';
-
+    var $refreshfilePath = '/cube/apps/360emed/oauth_info.json';
 
     function __construct() {
         //load key from file
@@ -22,7 +22,7 @@ class EMRCurlUtil
     function refreshToken()
     {
         //getSecret Json
-        $authBody = file_get_contents($this->keyfilePath);
+        $authBody = file_get_contents($this->refreshfilePath);
 
         //URL of targeted site
         $ch = curl_init();
