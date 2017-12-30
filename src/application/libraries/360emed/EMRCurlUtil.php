@@ -29,7 +29,8 @@ class EMRCurlUtil
 
         // set URL and other appropriate options
         curl_setopt($ch, CURLOPT_URL, $this->authRefreshURL);
-        curl_setopt($ch, CURLOPT_HEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_HEADER, array('Content-Type: application/json',
+                                               'Content-Length: ' . strlen($authBody)));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $authBody);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
