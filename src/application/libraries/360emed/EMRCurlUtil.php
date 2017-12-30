@@ -38,11 +38,12 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
+        print_r($output);die;
         $output = json_decode($output);
 
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
-        print_r($authKey);die;
+
         file_put_contents($this->keyfilePath,$authKey);
         $this->auth_key = file_get_contents($this->keyfilePath);
         
