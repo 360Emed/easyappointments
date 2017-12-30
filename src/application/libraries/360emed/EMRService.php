@@ -1,4 +1,6 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+require_once 'EMRCurlUtil.php';
 
 /**
  * Created by PhpStorm.
@@ -11,9 +13,17 @@ class EMRService
     function searchPatient($firstname, $lastname, $email, $dob)
     {
         $cutil = new EMRCurlUtil();
-        $searchFilter =  '?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
+        $searchFilter =  'api/Patientprofiles?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
         $results = $cutil->getData($searchFilter);
         print_r($results);die;
         return $results;
+    }
+
+    function insertPatient($customer)
+    {
+        //instantiate util
+        $cutil = new EMRCurlUtil();
+        //create post body form data
+        //send the request
     }
 }

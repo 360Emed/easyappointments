@@ -19,6 +19,9 @@ class EMRCurlUtil
         $this->auth_key = file_get_contents($this->keyfilePath);
     }
 
+    /**
+     * reload the authorization token from EMR
+     */
     function refreshToken()
     {
         //getSecret Json
@@ -38,8 +41,10 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        $output = json_decode($output);
+
         curl_close($ch);
+        $output = json_decode($output);
+
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
 
@@ -48,6 +53,14 @@ class EMRCurlUtil
         
     }
 
+    /**
+     * Send GET data requests to EMR
+     *
+     * @param $apipath
+     * @param int $retry
+     * @return mixed
+     * @throws Exception
+     */
     public function getData($apipath, $retry=0)
     {
 
@@ -67,21 +80,61 @@ class EMRCurlUtil
 
        // grab URL and pass it to the browser
        $output = curl_exec($ch);
-
+       curl_close($ch);
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-       if ($status = 401)
+       if ($status == 401)
        {
            $this->refreshToken();
            $retryCount = $retry+1;
-           $this->getData($apipath, $retryCount);
+           return $this->getData($apipath, $retryCount);
 
        }
        //echo $output;
        // close curl resource, and free up system resources
-       curl_close($ch);
+
 
        return $output;
+    }
+
+
+    public function postData($apipath, $postData, $retry=0)
+    {
+
+        if ($retry>=2)
+        {
+            throw new \Exception("Unable to authenticate to EMR server.");
+        }
+        //URL of targeted site
+        $ch = curl_init();
+
+        // set URL and other appropriate options
+        curl_setopt($ch, CURLOPT_URL, $this->server . $apipath);
+        curl_setopt($ch, CURLOPT_HEADER, array($this->auth_key));
+        // set URL and other appropriate options
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+            'Content-Length: ' . strlen($postData)));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+        // grab URL and pass it to the browser
+        $output = curl_exec($ch);
+        curl_close($ch);
+        // get status code
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($status == 401)
+        {
+            $this->refreshToken();
+            $retryCount = $retry+1;
+            return $this->postData($apipath, $postData, $retryCount);
+
+        }
+        //echo $output;
+        return $output;
     }
 }
