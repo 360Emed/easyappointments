@@ -31,7 +31,7 @@ class EMRCurlUtil
         curl_setopt($ch, CURLOPT_URL, $this->authRefreshURL);
         curl_setopt($ch, CURLOPT_HEADER, array('Content-Type: application/json',
                                                'Content-Length: ' . strlen($authBody)));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $authBody);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -39,9 +39,9 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        print_r($output);die;
+        print_r($output);
         $output = json_decode($output);
-
+        curl_close($ch);
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
 
@@ -52,7 +52,7 @@ class EMRCurlUtil
 
     public function getData($apipath, $retry=0)
     {
-        print_r($this->server . $apipath);
+
        if ($retry==2)
        {
            throw new \Exception("Unable to authenticate to EMR server.");
