@@ -42,6 +42,7 @@ class EMRCurlUtil
 
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
+        print_r($authKey);die;
         file_put_contents($this->keyfilePath,$authKey);
         $this->auth_key = file_get_contents($this->keyfilePath);
         
@@ -73,7 +74,7 @@ class EMRCurlUtil
        if ($status = 401)
        {
            $this->refreshToken();
-           $this->getData($apipath, $retry++);
+           //$this->getData($apipath, $retry++);
 
        }
        //echo $output;
