@@ -29,7 +29,7 @@ class EMRCurlUtil
 
         // set URL and other appropriate options
         curl_setopt($ch, CURLOPT_URL, $this->authRefreshURL);
-        curl_setopt($ch, CURLOPT_HEADER, array('Content-Type: application/json',
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
                                                'Content-Length: ' . strlen($authBody)));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $authBody);
@@ -76,6 +76,7 @@ class EMRCurlUtil
        if ($status = 401)
        {
            $this->refreshToken();
+           die;
            //$this->getData($apipath, $retry++);
 
        }
