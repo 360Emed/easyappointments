@@ -15,7 +15,7 @@ class EMRService
         $cutil = new EMRCurlUtil();
         $searchFilter =  'api/Patientprofiles?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
         $results = $cutil->getData($searchFilter);
-        print_r($results);die;
+        print_r($results);
         return $results;
     }
 
