@@ -23,7 +23,7 @@ class EMRCurlUtil
     {
         //getSecret Json
         $authBody = file_get_contents($this->refreshfilePath);
-
+        print_r($authBody);
         //URL of targeted site
         $ch = curl_init();
 
