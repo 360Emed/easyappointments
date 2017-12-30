@@ -23,7 +23,6 @@ class EMRCurlUtil
     {
         //getSecret Json
         $authBody = file_get_contents($this->refreshfilePath);
-        print_r($authBody);
         //URL of targeted site
         $ch = curl_init();
 
@@ -53,7 +52,7 @@ class EMRCurlUtil
     public function getData($apipath, $retry=0)
     {
 
-       if ($retry==2)
+       if ($retry>=2)
        {
            throw new \Exception("Unable to authenticate to EMR server.");
        }
@@ -76,8 +75,8 @@ class EMRCurlUtil
        if ($status = 401)
        {
            $this->refreshToken();
-           die;
-           //$this->getData($apipath, $retry++);
+           $retryCount = $retry+1;
+           $this->getData($apipath, $retryCount);
 
        }
        //echo $output;
