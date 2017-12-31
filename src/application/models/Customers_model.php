@@ -318,7 +318,7 @@ class Customers_Model extends CI_Model {
         return $this->db->get_where('ea_roles', array('slug' => DB_SLUG_CUSTOMER))->row()->id;
     }
 
-    public function existsEMRCustomer($customer)
+    public function existsEMRCustomer(&$customer)
     {
         $firstname = $customer['first_name'];
         $lastname = $customer['last_name'];
@@ -327,8 +327,19 @@ class Customers_Model extends CI_Model {
 
         $emrSvc = new EMRService();
         $results = $emrSvc->searchPatient($firstname, $lastname, $email, $dob);
-        print_r($results);print_r('stop the processing!');
-        return $results;
+        $results = json_decode($results);
+
+        if (count($results)>0)
+        {
+            //pid is the patient id
+            $customer['emrpatientID'] = $results[0]->pid;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }
 

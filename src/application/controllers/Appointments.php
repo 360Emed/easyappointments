@@ -328,7 +328,14 @@ class Appointments extends CI_Controller {
 
                 $starttime = $starttime->format('H:i');
                 $available_hours[] = $starttime;
+
+                //save the facility id and doctor id for later use
+                $this->session->set_userdata($_POST['service_id'], $schedule->emrproviderID);
+                $this->session->set_userdata($_POST['provider_id'], $schedule->emrcategoryID);
+
             }
+
+
 
             /*
             // If the user has selected the "any-provider" option then we will need to search
@@ -395,6 +402,9 @@ class Appointments extends CI_Controller {
             //if (!$this->_check_datetime_availability()) {
             //    throw new Exception($this->lang->line('requested_hour_is_unavailable'));
             // }
+            $scheduleData = array();
+            $scheduleData['facilityID'] = $this->session->userdata($_POST['post_data']['appointment']['id_services']);
+            $scheduleData['providerID'] = $this->session->userdata($_POST['post_data']['appointment']['id_users_provider']);
 
             $appointment = $_POST['post_data']['appointment'];
             $customer = $_POST['post_data']['customer'];
@@ -411,6 +421,12 @@ class Appointments extends CI_Controller {
             else{
                 print_r("Custmoer DOES NOT EXISTS IN EMR");die;
             }
+
+
+            // now we passed all the hurdles, let's perform the scheduling service!
+            $emrSvc = new EMRService();
+            $emrSvc->createAppointment($customer, $scheduleData);
+
 
             $appointment['id_users_customer'] = $customer_id;
 			$appointment['is_unavailable'] = (int)$appointment['is_unavailable']; // needs to be type casted

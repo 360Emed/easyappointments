@@ -7,7 +7,7 @@ require_once 'EMRCurlUtil.php';
  * Date: 12/22/17
  * Time: 3:16 PM
  */
-class SchedulingService
+class SchedulingService extends CI_Model
 {
     var $datetimeformat = 'm-d-Y';
 
@@ -29,6 +29,13 @@ class SchedulingService
         $httputil = new CurlUtil();
         $apipath = 'getdoctorschedule/' . $serviceID . '/' . $providerID . '/' . $startdateStr . '/' . $enddateStr;
         $results = $httputil->getData($apipath);
+
+        //store the results in cache
+        foreach($results as $result)
+        {
+            $this->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end);
+        }
+
         //results is in json format
         return $results;
     }
@@ -84,5 +91,62 @@ class SchedulingService
         $unavailabilities = json_encode($unavailableslots);
 
         return $unavailabilities;
+    }
+
+
+    /**
+     * insert a schedule cache record
+     *
+     * @param $providerID
+     * @param $scheduleID
+     * @param $facilityID
+     * @param $start
+     * @param $end
+     */
+    private function cacheSchedule($providerID, $scheduleID, $categoryID, $start, $end)
+    {
+        try
+        {
+            $data = array();
+            $data['eaproviderID'] = $providerID;
+            $data['eacategoryID'] = $categoryID;
+            $data['scheduleID'] = $scheduleID;
+            $data['startTime'] = $start;
+            $data['endTime'] = $end;
+
+
+            $this->db->insert('360emed_schedule_cache', $data);
+        }
+        catch(Exception $e)
+        {
+            //do nothing;
+        }
+
+    }
+
+    /**
+     * get the schedule ID from schedule cache, schedule cache is refreshed everytime a schedule set is loaded
+     *
+     * @param $providerID
+     * @param $facilityID
+     * @param $start
+     * @param $end
+     * @return array
+     */
+    public function getScheduleFromCache($providerID,$categoryID,$start,$end)
+    {
+        $schedule = array();
+        $results = $this->db->get_where('360emed_schedule_cache', array('eaproviderID' => $providerID,
+            'eacategoryID' => $categoryID,
+            'startTime' => $start,
+            'endTime' => $end
+        ))->row_array();
+
+        if (isset($results))
+        {
+            $schedule['id'] = $results['scheduleID'];
+        }
+
+        return $schedule;
     }
 }

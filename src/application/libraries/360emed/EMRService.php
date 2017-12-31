@@ -15,15 +15,33 @@ class EMRService
         $cutil = new EMRCurlUtil();
         $searchFilter =  'api/Patientprofiles?filter={"where":{"and":[{"first":"' . $firstname . '"},{"last":"' . $lastname . '"},{"birthdate":"' . $dob . '"},{"email":"' . $email . '"}]}}';
         $results = $cutil->getData($searchFilter);
-        print_r($results);
         return $results;
     }
 
-    function insertPatient($customer)
+    /**
+     *
+     * @param $customer
+     */
+    function createAppointment($customer, $scheduleData)
     {
         //instantiate util
         $cutil = new EMRCurlUtil();
         //create post body form data
+        $patientData = array();
+        $patientData['facilityID'] = $scheduleData['facilityID'];
+        $patientData['ownerid'] = $customer['emrpatientID'];
+        $patientData['appstart'] = '';
+        $patientData['appstop'] = '';
+        $patientData['emrapptstart'] = '';
+        $patientData['durantion'] = 20;
+        $patientData['doctorid'] = $scheduleData['providerID'];;
+        $patientData['resourceid'] = '';
+        $patientData['appttypeid'] = 181;
+        $patientData['companyid'] = 439;
+        $patientData['createdby'] = 'vpatel';
+        $patientData['lastmodifiedby'] = 'vpatel';
+        $patientData['scheduleID'] = '';
         //send the request
     }
+
 }
