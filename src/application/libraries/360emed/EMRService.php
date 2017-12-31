@@ -28,19 +28,19 @@ class EMRService
         $cutil = new EMRCurlUtil();
         //create post body form data
         $patientData = array();
-        $patientData['facilityid'] = $scheduleData['emrcategoryID'];
-        $patientData['ownerid'] = $customer['emrpatientID'];
-        $patientData['appstart'] = $scheduleData['start'];
-        $patientData['appstop'] = $scheduleData['end'];
-        $patientData['emrapptstart'] = $scheduleData['start'];
-        $patientData['durantion'] = 20;
-        $patientData['doctorid'] = $scheduleData['emrproviderID'];
-        $patientData['resourceid'] = $scheduleData['emrproviderID'];
-        $patientData['appttypeid'] = 181;
-        $patientData['companyid'] = 439;
+        $patientData['facilityid'] = (string)$scheduleData['emrcategoryID'];
+        $patientData['ownerid'] = (string)$customer['emrpatientID'];
+        $patientData['apptstart'] = (string)$scheduleData['start'];
+        $patientData['apptstop'] = (string)$scheduleData['end'];
+        $patientData['emrapptstart'] = (string)$scheduleData['start'];
+        $patientData['duration'] = '20';
+        $patientData['doctorid'] = (string)$scheduleData['emrproviderID'];
+        $patientData['resourceid'] = (string)$scheduleData['emrproviderID'];
+        $patientData['appttypeid'] = '181';
+        $patientData['companyid'] = '439';
         $patientData['createdby'] = 'vpatel';
         $patientData['lastmodifiedby'] = 'vpatel';
-        $patientData['scheduleID'] = $scheduleData['scheduleID'];
+        $patientData['scheduleID'] = (string)$scheduleData['scheduleID'];
         //send the request
         $result = $cutil->postData('api/Appointments/ApptInsert', json_encode($patientData));
 
