@@ -41,7 +41,7 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        print_r($authBody);
+
         curl_close($ch);
         $output = json_decode($output);
 
@@ -84,7 +84,7 @@ class EMRCurlUtil
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-       if ($status == 401)
+       if ($status !=200)
        {
            $this->refreshToken();
            $retryCount = $retry+1;
@@ -127,7 +127,7 @@ class EMRCurlUtil
         // get status code
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if ($status == 401)
+        if ($status !=200)
         {
             $this->refreshToken();
             $retryCount = $retry+1;
