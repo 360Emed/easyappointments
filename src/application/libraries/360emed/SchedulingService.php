@@ -36,8 +36,9 @@ class SchedulingService
         $apipath = 'getdoctorschedule/' . $serviceID . '/' . $providerID . '/' . $startdateStr . '/' . $enddateStr;
         $results = $httputil->getData($apipath);
 
+        $resultsArray = json_decode($results);
         //store the results in cache
-        foreach($results as $result)
+        foreach($resultsArray as $result)
         {
             $this->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end);
         }
