@@ -123,7 +123,7 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        print_r($output);
+        print_r($postData);
         // get status code
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
