@@ -87,6 +87,11 @@ class Customers_Model extends CI_Model {
      * @return int Returns the id of the new record.
      */
     protected function _insert($customer) {
+        //use a mock object reference for update
+        $customerModel = $customer;
+        unset($customerModel['emrpatientID']);
+
+
         // Before inserting the customer we need to get the customer's role id
         // from the database and assign it to the new record as a foreign key.
         $customer_role_id = $this->db
@@ -95,9 +100,9 @@ class Customers_Model extends CI_Model {
                 ->where('slug', DB_SLUG_CUSTOMER)
                 ->get()->row()->id;
 
-        $customer['id_roles'] = $customer_role_id;
+        $customerModel['id_roles'] = $customer_role_id;
 
-        if (!$this->db->insert('ea_users', $customer)) {
+        if (!$this->db->insert('ea_users', $customerModel)) {
             throw new Exception('Could not insert customer to the database.');
         }
 
