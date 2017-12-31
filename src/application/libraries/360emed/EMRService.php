@@ -40,7 +40,7 @@ class EMRService
         $patientData['companyid'] = '439';
         $patientData['createdby'] = 'vpatel';
         $patientData['lastmodifiedby'] = 'vpatel';
-        $patientData['scheduleID'] = (string)$scheduleData['scheduleID'];
+        $patientData['scheduleid'] = (string)$scheduleData['scheduleID'];
 
         print_r(json_encode($patientData));
 
