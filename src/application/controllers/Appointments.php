@@ -307,7 +307,7 @@ class Appointments extends CI_Controller {
             $dateChecked = new Datetime($_POST['selected_date'] . '00:00:00');
 
             $dateChecked = $dateChecked->format('m-d-Y');
-            $scheduleService = new SchedulingService();
+            $scheduleService = new SchedulingService($this->db);
             $schedules = $scheduleService->getSchedules($_POST['provider_id'],$_POST['service_id'] ,$dateChecked ,$dateChecked);
             $schedules = json_decode($schedules);
 
@@ -547,7 +547,7 @@ class Appointments extends CI_Controller {
 
 
             //this returns the json array for the days NOT available for scheduling
-            $schedule_service = new SchedulingService();
+            $schedule_service = new SchedulingService($this->db);
 
             $unavailable_dates = $schedule_service->getUnavailableDaysForMonth($provider_id, $service_id, $selected_date->format('m-d-Y'));
 

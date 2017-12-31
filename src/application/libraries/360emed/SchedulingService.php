@@ -7,9 +7,15 @@ require_once 'EMRCurlUtil.php';
  * Date: 12/22/17
  * Time: 3:16 PM
  */
-class SchedulingService extends CI_Model
+class SchedulingService
 {
     var $datetimeformat = 'm-d-Y';
+    var $db;
+
+    public function __construct($db = null)
+    {
+        $this->db = $db;
+    }
 
     /**
      * Get the provider schedule from the 360 emed service
