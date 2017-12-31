@@ -115,14 +115,19 @@ class Customers_Model extends CI_Model {
      * @return int Returns the updated record id.
      */
     protected function _update($customer) {
+
+        //use a mock object reference for update
+        $customerModel = $customer;
+        unset($customerModel['emrpatientID']);
+
         // Do not update empty string values.
-        foreach ($customer as $key => $value) {
+        foreach ($customerModel as $key => $value) {
             if ($value === '')
-                unset($customer[$key]);
+                unset($customerModel[$key]);
         }
 
-        $this->db->where('id', $customer['id']);
-        if (!$this->db->update('ea_users', $customer)) {
+        $this->db->where('id', $customerModel['id']);
+        if (!$this->db->update('ea_users', $customerModel)) {
             throw new Exception('Could not update customer to the database.');
         }
 
@@ -327,7 +332,7 @@ class Customers_Model extends CI_Model {
 
         $emrSvc = new EMRService();
         $results = $emrSvc->searchPatient($firstname, $lastname, $email, $dob);
-       
+
         $results = json_decode($results);
 
         if (count($results)>0)
