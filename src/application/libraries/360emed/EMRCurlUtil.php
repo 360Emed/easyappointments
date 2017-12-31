@@ -41,7 +41,7 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        print_r($output);
+
         curl_close($ch);
         $output = json_decode($output);
 
@@ -83,7 +83,7 @@ class EMRCurlUtil
        curl_close($ch);
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        print_r("Status Code:" . $status);
        if ($status !=200)
        {
            $this->refreshToken();
