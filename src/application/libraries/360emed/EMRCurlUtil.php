@@ -111,10 +111,10 @@ class EMRCurlUtil
 
         // set URL and other appropriate options
         curl_setopt($ch, CURLOPT_URL, $this->server . $apipath);
-        curl_setopt($ch, CURLOPT_HEADER, array($this->auth_key));
         // set URL and other appropriate options
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
-            'Content-Length: ' . strlen($postData)));
+            'Content-Length: ' . strlen($postData),
+            $this->auth_key));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
