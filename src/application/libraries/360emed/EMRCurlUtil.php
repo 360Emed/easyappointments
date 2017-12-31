@@ -41,7 +41,7 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-
+        print_r($output);
         curl_close($ch);
         $output = json_decode($output);
 
