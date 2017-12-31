@@ -42,9 +42,8 @@ class EMRCurlUtil
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
 
-        curl_close($ch);
         $output = json_decode($output);
-
+        curl_close($ch);
         //get the auth key and save it to file
         $authKey = 'Authorization: ' . $output->token_type . ' ' . $output->access_token;
 
@@ -83,7 +82,7 @@ class EMRCurlUtil
 
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        print_r($output);
+
         curl_close($ch);
        if ($status !=200)
        {
@@ -124,10 +123,10 @@ class EMRCurlUtil
 
         // grab URL and pass it to the browser
         $output = curl_exec($ch);
-        curl_close($ch);
+
         // get status code
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        curl_close($ch);
         if ($status !=200)
         {
             $this->refreshToken();
