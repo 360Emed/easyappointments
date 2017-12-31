@@ -83,7 +83,7 @@ class EMRCurlUtil
        curl_close($ch);
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        print_r($output);
        if ($status == 401)
        {
            $this->refreshToken();
