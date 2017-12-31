@@ -41,6 +41,9 @@ class EMRService
         $patientData['createdby'] = 'vpatel';
         $patientData['lastmodifiedby'] = 'vpatel';
         $patientData['scheduleID'] = (string)$scheduleData['scheduleID'];
+
+        print_r(json_encode($patientData));
+
         //send the request
         $result = $cutil->postData('api/Appointments/ApptInsert', json_encode($patientData));
 
