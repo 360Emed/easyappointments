@@ -406,6 +406,26 @@ class Appointments extends CI_Controller {
             $scheduleData['facilityID'] = $this->session->userdata($_POST['post_data']['appointment']['id_services']);
             $scheduleData['providerID'] = $this->session->userdata($_POST['post_data']['appointment']['id_users_provider']);
 
+            //get the schedule ID from cache
+            $scheduleSvc = new SchedulingService($this->db);
+
+            //generate cache query params
+            $startDateTime = new DateTime($_POST['post_data']['appointment']['start_datetime']);
+            $startDateTime = $startDateTime->format('m/d/Y H:i:s');
+
+            $endDateTime = new DateTime($_POST['post_data']['appointment']['end_datetime']);
+            $endDateTime = $endDateTime->format('m/d/Y H:i:s');
+
+            $result = $scheduleSvc->getScheduleFromCache($_POST['post_data']['appointment']['id_users_provider'],
+                $_POST['post_data']['appointment']['id_services'],
+                $startDateTime,
+                $endDateTime
+                );
+
+            $scheduleData['scheduleID'] = $result['scheduleID'];
+            $scheduleData['start'] = $startDateTime;
+            $scheduleData['end'] = $endDateTime;
+            
             $appointment = $_POST['post_data']['appointment'];
             $customer = $_POST['post_data']['customer'];
 

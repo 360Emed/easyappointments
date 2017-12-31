@@ -37,7 +37,7 @@ class SchedulingService
         $results = $httputil->getData($apipath);
 
         $resultsArray = json_decode($results);
-        //store the results in cache
+        //store the results in cache, this needs to be optimized, I am looping results 3 times in a row...
         foreach($resultsArray as $result)
         {
             $this->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end);

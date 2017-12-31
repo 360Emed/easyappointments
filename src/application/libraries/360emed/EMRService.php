@@ -30,18 +30,21 @@ class EMRService
         $patientData = array();
         $patientData['facilityID'] = $scheduleData['facilityID'];
         $patientData['ownerid'] = $customer['emrpatientID'];
-        $patientData['appstart'] = '';
-        $patientData['appstop'] = '';
-        $patientData['emrapptstart'] = '';
+        $patientData['appstart'] = $scheduleData['start'];
+        $patientData['appstop'] = $scheduleData['end'];
+        $patientData['emrapptstart'] = $scheduleData['start'];
         $patientData['durantion'] = 20;
-        $patientData['doctorid'] = $scheduleData['providerID'];;
-        $patientData['resourceid'] = '';
+        $patientData['doctorid'] = $scheduleData['providerID'];
+        $patientData['resourceid'] = $scheduleData['providerID'];
         $patientData['appttypeid'] = 181;
         $patientData['companyid'] = 439;
         $patientData['createdby'] = 'vpatel';
         $patientData['lastmodifiedby'] = 'vpatel';
-        $patientData['scheduleID'] = '';
+        $patientData['scheduleID'] = $scheduleData['scheduleID'];
         //send the request
+        $result = $cutil->postData('api/Appointments/ApptInsert', json_encode($patientData));
+
+        print_r($result);
     }
 
 }
