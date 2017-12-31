@@ -400,7 +400,7 @@ class Appointments extends CI_Controller {
             //    throw new Exception($this->lang->line('requested_hour_is_unavailable'));
             // }
             $scheduleData = array();
-           
+
             //get the schedule ID from cache
             $scheduleSvc = new SchedulingService($this->db);
 
@@ -420,6 +420,9 @@ class Appointments extends CI_Controller {
             $scheduleData['scheduleID'] = $result['scheduleID'];
             $scheduleData['start'] = $startDateTime;
             $scheduleData['end'] = $endDateTime;
+            $scheduleData['emrcategoryID'] = $result['emrcategoryID'];
+            $scheduleData['emrproviderID'] = $result['emrproviderID'];
+
 
             $appointment = $_POST['post_data']['appointment'];
             $customer = $_POST['post_data']['customer'];
