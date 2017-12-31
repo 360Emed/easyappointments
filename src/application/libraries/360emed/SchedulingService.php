@@ -153,7 +153,7 @@ class SchedulingService
 
         if (isset($results))
         {
-            $schedule['id'] = $results['scheduleID'];
+            $schedule['scheduleID'] = $results['scheduleID'];
             $schedule['emrcategoryID'] = $results['emrcategoryID'];
             $schedule['emrproviderID'] = $results['emrproviderID'];
         }
