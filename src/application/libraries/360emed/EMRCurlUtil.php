@@ -80,10 +80,11 @@ class EMRCurlUtil
 
        // grab URL and pass it to the browser
        $output = curl_exec($ch);
-       curl_close($ch);
+
        // get status code
        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        print_r("Status Code:" . $status);
+        print_r($output);
+        curl_close($ch);
        if ($status !=200)
        {
            $this->refreshToken();
