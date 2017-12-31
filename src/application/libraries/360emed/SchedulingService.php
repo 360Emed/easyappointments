@@ -111,7 +111,7 @@ class SchedulingService
      */
     private function cacheSchedule($providerID, $scheduleID, $categoryID, $start, $end)
     {
-        try
+        //try
         {
             $data = array();
             $data['eaproviderID'] = $providerID;
@@ -123,7 +123,7 @@ class SchedulingService
 
             $this->db->insert('360emed_schedule_cache', $data);
         }
-        catch(Exception $e)
+        //catch(Exception $e)
         {
             //do nothing;
         }
