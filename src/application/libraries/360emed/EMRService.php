@@ -44,7 +44,6 @@ class EMRService
         //send the request
         $result = $cutil->postData('api/Appointments/ApptInsert', json_encode($patientData));
 
-        print_r($result);
     }
 
 }
