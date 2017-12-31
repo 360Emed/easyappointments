@@ -28,14 +28,14 @@ class EMRService
         $cutil = new EMRCurlUtil();
         //create post body form data
         $patientData = array();
-        $patientData['facilityID'] = $scheduleData['facilityID'];
+        $patientData['facilityid'] = $scheduleData['emrcategoryID'];
         $patientData['ownerid'] = $customer['emrpatientID'];
         $patientData['appstart'] = $scheduleData['start'];
         $patientData['appstop'] = $scheduleData['end'];
         $patientData['emrapptstart'] = $scheduleData['start'];
         $patientData['durantion'] = 20;
-        $patientData['doctorid'] = $scheduleData['providerID'];
-        $patientData['resourceid'] = $scheduleData['providerID'];
+        $patientData['doctorid'] = $scheduleData['emrproviderID'];
+        $patientData['resourceid'] = $scheduleData['emrproviderID'];
         $patientData['appttypeid'] = 181;
         $patientData['companyid'] = 439;
         $patientData['createdby'] = 'vpatel';

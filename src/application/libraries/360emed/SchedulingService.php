@@ -40,7 +40,7 @@ class SchedulingService
         //store the results in cache, this needs to be optimized, I am looping results 3 times in a row...
         foreach($resultsArray as $result)
         {
-            $this->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end);
+            $this->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end, $result->emrproviderID, $result->emrcategoryID);
         }
 
         //results is in json format
@@ -110,7 +110,7 @@ class SchedulingService
      * @param $start
      * @param $end
      */
-    private function cacheSchedule($providerID, $scheduleID, $categoryID, $start, $end)
+    private function cacheSchedule($providerID, $scheduleID, $categoryID, $start, $end, $emrproviderID, $emrcategoryID)
     {
         //try
         {
@@ -120,6 +120,8 @@ class SchedulingService
             $data['scheduleID'] = $scheduleID;
             $data['startTime'] = $start;
             $data['endTime'] = $end;
+            $data['emrproviderID'] = $emrproviderID;
+            $data['emrcategoryID'] = $emrcategoryID;
 
 
             $this->db->insert('360emed_schedule_cache', $data);
@@ -152,6 +154,8 @@ class SchedulingService
         if (isset($results))
         {
             $schedule['id'] = $results['scheduleID'];
+            $schedule['emrcategoryID'] = $results['emrcategoryID'];
+            $schedule['emrproviderID'] = $results['emrproviderID'];
         }
 
         return $schedule;
