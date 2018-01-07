@@ -49,7 +49,7 @@ class Schedule extends API_V1_Controller {
             $scheduleJson = $request->getBody();
             $result = json_decode($scheduleJson);
             
-            $this->emed->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end, $result->emrproviderID, $result->emrcategoryID);
+            $this->emed_util->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end, $result->emrproviderID, $result->emrcategoryID);
 
 
             $response = new Response([
