@@ -147,8 +147,8 @@ class SchedulingService
         $schedule = array();
         $results = $this->db->get_where('360emed_schedule_cache', array('eaproviderID' => $providerID,
             'eacategoryID' => $categoryID,
-            'startTime' => $start,
-            'endTime' => $end
+            'startTime' => $start
+            //'endTime' => $end
         ))->row_array();
 
         if (isset($results))
