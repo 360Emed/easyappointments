@@ -46,7 +46,7 @@ class Schedule extends API_V1_Controller {
             // Insert the schedule to the cache database.
             $request = new Request();
             $scheduleJson = $request->getBody();
-            $result = json_decode($scheduleJson);
+            //$result = json_decode($scheduleJson);
             error_log(print_r($scheduleJson,true));die;
             $this->emed_util->cacheSchedule($result->eaproviderID, $result->id, $result->eacategoryID, $result->start, $result->end, $result->emrproviderID, $result->emrcategoryID);
 
