@@ -35,8 +35,7 @@ class Schedule extends API_V1_Controller {
      */
     public function __construct() {
         parent::__construct();
-
-        $this->emed_util = new SchedulingService();
+        $this->emed_util = new SchedulingService($this->db);
     }
 
     /**
