@@ -77,6 +77,6 @@ $route['api/v1/settings/(:any)']['put'] = 'api/v1/settings/put/$1';
 $route['api/v1/settings/(:any)']['delete'] = 'api/v1/settings/delete/$1';
 
 $route['api/v1/availabilities']['get'] = 'api/v1/availabilities/get';
-
+$route['api/v1/schedule']['post'] = 'api/v1/availabilities/post';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

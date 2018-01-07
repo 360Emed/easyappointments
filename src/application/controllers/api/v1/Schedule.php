@@ -17,7 +17,7 @@ use \EA\Engine\Api\V1\Response;
 use \EA\Engine\Api\V1\Request;
 
 /**
- * Settings Controller
+ * Schedule Controller
  *
  * @package Controllers
  * @subpackage API
