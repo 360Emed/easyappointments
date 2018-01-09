@@ -417,7 +417,7 @@ class Appointments extends CI_Controller {
 
             $startTimeRightFormat = $startDateTime->format('m/d/Y h:i:s A');
             $endTimeRightFormat = $endDateTime->format('m/d/Y h:i:s A');
-            $startDateRightFormat = $startDateTime->format('Y-m-d');
+            $startDateRightFormat = $startDateTime->format('Y-m-d') . " 00:00:00";
             $scheduleData['scheduleID'] = $result['scheduleID'];
             $scheduleData['start'] = $startTimeRightFormat;
             $scheduleData['end'] = $endTimeRightFormat;
