@@ -406,20 +406,24 @@ class Appointments extends CI_Controller {
 
             //generate cache query params
             $startDateTime = new DateTime($_POST['post_data']['appointment']['start_datetime']);
-            $startDateTime = $startDateTime->format('m/d/Y H:i:s');
+            $startDateTimeSearch = $startDateTime->format('m/d/Y H:i:s');
 
             $endDateTime = new DateTime($_POST['post_data']['appointment']['end_datetime']);
-            $endDateTime = $endDateTime->format('m/d/Y H:i:s');
+            $endDateTimeSearch = $endDateTime->format('m/d/Y H:i:s');
 
             $result = $scheduleSvc->getScheduleFromCache($_POST['post_data']['appointment']['id_users_provider'],
                 $_POST['post_data']['appointment']['id_services'],
-                $startDateTime,
-                $endDateTime
+                $startDateTimeSearch,
+                $endDateTimeSearch
                 );
 
+            $startTimeRightFormat = $startDateTime->format('m/d/Y h:i:s A');
+            $endTimeRightFormat = $endDateTime->format('m/d/Y h:i:s A');
+            $startDateRightFormat = $startDateTime->format('m/d/Y');
             $scheduleData['scheduleID'] = $result['scheduleID'];
-            $scheduleData['start'] = $startDateTime;
-            $scheduleData['end'] = $endDateTime;
+            $scheduleData['start'] = $startTimeRightFormat;
+            $scheduleData['end'] = $startTimeRightFormat;
+            $scheduleData['emrstartdate'] = $startDateRightFormat;
             $scheduleData['emrcategoryID'] = $result['emrcategoryID'];
             $scheduleData['emrproviderID'] = $result['emrproviderID'];
 

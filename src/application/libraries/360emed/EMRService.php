@@ -32,7 +32,7 @@ class EMRService
         $patientData['ownerid'] = (string)$customer['emrpatientID'];
         $patientData['apptstart'] = (string)$scheduleData['start'];
         $patientData['apptstop'] = (string)$scheduleData['end'];
-        $patientData['emrapptstart'] = (string)$scheduleData['start'];
+        $patientData['emrapptstart'] = (string)$scheduleData['emrstartdate'];
         $patientData['duration'] = '20';
         $patientData['doctorid'] = (string)$scheduleData['emrproviderID'];
         $patientData['resourceid'] = (string)$scheduleData['emrproviderID'];
