@@ -137,7 +137,7 @@ class SchedulingService
      * @param $end
      * @return array
      */
-    public function getScheduleFromCache($providerID,$categoryID,$start,$end)
+    public function getScheduleFromCache($providerID,$categoryID,$start)
     {
         $schedule = array();
         $results = $this->db->get_where('360emed_schedule_cache', array('eaproviderID' => $providerID,
@@ -149,6 +149,7 @@ class SchedulingService
         if (isset($results))
         {
             $schedule['scheduleID'] = $results['scheduleID'];
+            $schedule['endTime'] = $results['endTime'];
             $schedule['emrcategoryID'] = $results['emrcategoryID'];
             $schedule['emrproviderID'] = $results['emrproviderID'];
         }

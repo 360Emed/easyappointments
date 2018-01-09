@@ -408,15 +408,13 @@ class Appointments extends CI_Controller {
             $startDateTime = new DateTime($_POST['post_data']['appointment']['start_datetime']);
             $startDateTimeSearch = $startDateTime->format('m/d/Y H:i:s');
 
-            $endDateTime = new DateTime($_POST['post_data']['appointment']['end_datetime']);
-            $endDateTimeSearch = $endDateTime->format('m/d/Y H:i:s');
-
             $result = $scheduleSvc->getScheduleFromCache($_POST['post_data']['appointment']['id_users_provider'],
                 $_POST['post_data']['appointment']['id_services'],
-                $startDateTimeSearch,
-                $endDateTimeSearch
-                );
+                $startDateTimeSearch
 
+                );
+            $endDateTime = new DateTime($result['endTime']);
+            
             $startTimeRightFormat = $startDateTime->format('m/d/Y h:i:s A');
             $endTimeRightFormat = $endDateTime->format('m/d/Y h:i:s A');
             $startDateRightFormat = $startDateTime->format('m/d/Y');
