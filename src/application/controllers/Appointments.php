@@ -414,13 +414,13 @@ class Appointments extends CI_Controller {
 
                 );
             $endDateTime = new DateTime($result['endTime']);
-            
+
             $startTimeRightFormat = $startDateTime->format('m/d/Y h:i:s A');
             $endTimeRightFormat = $endDateTime->format('m/d/Y h:i:s A');
             $startDateRightFormat = $startDateTime->format('m/d/Y');
             $scheduleData['scheduleID'] = $result['scheduleID'];
             $scheduleData['start'] = $startTimeRightFormat;
-            $scheduleData['end'] = $startTimeRightFormat;
+            $scheduleData['end'] = $endTimeRightFormat;
             $scheduleData['emrstartdate'] = $startDateRightFormat;
             $scheduleData['emrcategoryID'] = $result['emrcategoryID'];
             $scheduleData['emrproviderID'] = $result['emrproviderID'];
