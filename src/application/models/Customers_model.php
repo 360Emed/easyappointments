@@ -343,7 +343,7 @@ class Customers_Model extends CI_Model {
         if (count($results)>0)
         {
             //pid is the patient id
-            $customer['emrpatientID'] = $results[0]->pid;
+            $customer['emrpatientID'] = $results[0]->patientprofileid;
             return true;
         }
         else
