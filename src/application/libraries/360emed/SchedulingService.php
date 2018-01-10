@@ -43,6 +43,22 @@ class SchedulingService
     }
 
     /**
+     * check if availability is good for the time slot
+     *
+     * @param $eadoctorid
+     * @param $startdatetime
+     */
+    function checkScheduleAvailability($eadoctorid, $startdatetime)
+    {
+        $results = $this->db->get_where('ea_apppointments', array('id_users_provider'=>$eadoctorid,'start_datetime'=>$startdatetime))->row_array();
+        if (isset($results))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * returns the unavailable days by month
      * @param $providerID
      * @param $serviceID

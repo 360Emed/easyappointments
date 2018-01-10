@@ -326,6 +326,12 @@ class Appointments extends CI_Controller {
                 if ($starttime < $nextAvailableTime)
                     continue;
 
+                //remove hours that are booked already
+                if (!$scheduleService->checkScheduleAvailability($_POST['provider_id'],$starttime->format('y-m-d H:i:s')))
+                {
+                    continue;
+                }
+
                 $starttime = $starttime->format('H:i');
                 $available_hours[] = $starttime;
 
