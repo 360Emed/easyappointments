@@ -50,7 +50,7 @@ class SchedulingService
      */
     function checkScheduleAvailability($eadoctorid, $startdatetime)
     {
-        $results = $this->db->get_where('ea_apppointments', array('id_users_provider'=>$eadoctorid,'start_datetime'=>$startdatetime))->row_array();
+        $results = $this->db->get_where('ea_appointments', array('id_users_provider'=>$eadoctorid,'start_datetime'=>$startdatetime))->row_array();
         if (isset($results))
         {
             return false;
